@@ -6,44 +6,46 @@
     9/19/90
 
 ## Table of Contents
-### [Preface](#preface)
-### [Introduction](#introduction)
-### [Buffering](#buffering)
-### [Alarm Functions](#alarm-functions)
-### [Button Functions](#button functions)
-### [Configuration Functions](#configuration-functions)
-### [File I/O with C Strings](#file-i/o-with-C-Strings)
-### [Dialog Function](#dialog-function)
-### [Drawing Functions](#drawing-functions)
-### [Draw](#draw)
-### [Environment](#environment)
-### [File Picking Functions](#file-picking-functions)
-### [Flush](#flush)
-### [Font Functions](#Font-functions)
-### [Get-Put Functions](#get-put-functions)
-### [Get String](#get-string)
-### [Key Sensing Functions](#key-sensing-functions)
-### [Menuing Functions](#menuing-functions)
-### [Mouse Functions](#mouse-functions)
-### [MouseKey](#mousekey)
-### [MouseXY](#mousexy)
-### [Movemem](#movemem)
-### [Multi-Vue Functions](#multi-vue-functions)
-### [Object Sprite Functions](#object-sprite-functions)
-### [Play](#Play)
-### [Polygon Functions](#polygon-functions)
-### [Set Type](#set-type)
-### [Shadow](#shadow)
-### [GETSTAT-SETSTAT Functions](#getstat-setstat-functions)
-### [Tone Function](#tone-function)
-### [Tandy Menu Function](#tandy-menu-function)
-### [Cursor Functions](#cursor-functions)
-### [Window Functions](#window-functions)
+- [Preface](#preface)
+- [Introduction](#introduction)
+- [Buffering](#buffering)
+- [Alarm Functions](#alarm-functions)
+- [Button Functions](#button-functions)
+- [Configuration Functions](#configuration-functions)
+- [File I/O with C Strings](#file-io-with-c-strings)
+- [Dialog Function](#dialog-function)
+- [Drawing Functions](#drawing-functions)
+- [Draw](#draw)
+- [Environment](#environment)
+- [File Picking Functions](#file-picking-functions)
+- [Flush](#flush)
+- [Font Functions](#font-functions)
+- [Get-Put Functions](#get-put-functions)
+- [Get String](#get-string)
+- [Key Sensing Functions](#key-sensing-functions)
+- [Menuing Functions](#menuing-functions)
+- [Mouse Functions](#mouse-functions)
+- [MouseKey](#mousekey)
+- [MouseXY](#mousexy)
+- [Movemem](#movemem)
+- [Multi-Vue Functions](#multi-vue-functions)
+- [Object Sprite Functions](#object-sprite-functions)
+- [Play](#play)
+- [Polygon Functions](#polygon-functions)
+- [Set Type](#set-type)
+- [Shadow](#shadow)
+- [GETSTAT-SETSTAT Functions](#getstat-setstat-functions)
+- [Tone Function](#tone-function)
+- [Tandy Menu Function](#tandy-menu-function)
+- [Cursor Functions](#cursor-functions)
+- [Window Functions](#window-functions)
 
+<a name="preface" />
 ## Preface
 
 This is a reformatting of the CGFX documentation in Markdown. Started in April of 2018 during the porting of the library to the CMOC compiler.
 
+<a name="introduction" />
 ## Introduction
 
 This  is  the  seventh edition of my CGFX library replacement,   with   source   and   some    real documentation.    Version   7   adds  a  few  new functions, which are described in detail  on  the following pages.   Version 7 also fixes some bugs in the buffering added in version 5.
@@ -60,6 +62,7 @@ If you come  across  any  bugs/omissions/spelling errors  in  the  library,  or 
 
     DODGECOLT (Delphi)
 
+<a name="buffering" />
 ## Buffering
 
 As previously stated, this version of the library has  optional buffering for the output of certain functions.  To include the buffering code, simply use the function `_Flush()`.  This will inform  the linker that  buffered  output  is  desired.   The buffer used is 256 bytes  long,  and  is  flushed when one of the following occurs:
@@ -93,6 +96,7 @@ Note  that  for  the  tests   using   lines,   no measurable difference  was  de
 
 Many thanks to Eddie Kuns  who  got  me  thinking about  adding  buffered  output to the lib and to Bob van der Poel for pointing out an  omission  I made with the `_Flush()` function.
 
+<a name="alarm-functions" />
 ## Alarm Functions
 
 ### Usage
@@ -123,6 +127,7 @@ Many thanks to Eddie Kuns  who  got  me  thinking about  adding  buffered  outpu
 
 Only one alarm can be active at a time.
 
+<a name="button-functions" />
 ## Button Functions
 
 ### Usage
@@ -151,6 +156,7 @@ The  `BDown()`  function is called after a `BUp()` to push the button down.  Thi
 
 For these functions to work  properly,  you  must have window  scaling  turned off.  Otherwise, the lines that are drawn will not be placed  properly (resulting in a garbled display.)
 
+<a name="configuration-functions" />
 ## Configuration Functions
 
 ### Usage
@@ -244,6 +250,7 @@ The  operating  system   automatically   converts palette settings when using a 
 
 On error, these functions  return  -1,  with  the error number in errno.
 
+<a name="file-io-with-c-strings" />
 ## File I/O with C Strings
 
 ### Usage
@@ -270,6 +277,7 @@ These  functions  are  variations of the standard `read()`,   `readln()`,   `wri
 
 The  `cwrite()` and `cwriteln()` functions will write a maximum of n characters to the  specified  path using  the  respective  system  call- `I$Write` for `cwrite()` and `I$WriteLn` for `cwriteln()`.
 
+<a name="dialog-function" />
 ## Dialog Function
 
 ### Usage
@@ -371,6 +379,7 @@ The D_END type of object signals the end  of  the array   of   objects   in  the
         _Flush(); /* flush the buffer */
     }
 
+<a name="drawing-functions" />
 ## Drawing Functions
 
 ### Usage:
@@ -456,6 +465,7 @@ On  error,  these  functions  return  -1 with the error number in errno.
 
 The `Circle()`, `Ellipse()`, and `Arc()` radii are  not scaled when draw scaling is enabled.  Presumably, this bug will be fixed in a future release of the operating system.
           
+<a name="draw" />
 ## Draw
 
 ### Usage
@@ -491,6 +501,7 @@ The    draw   string   can   optionally   contain sub-strings  (indicated  by  %
 
 When  buffering  output, lines which fall outside the  window  will  cause  further  writes  to  be ignored until the buffer is flushed.
 
+<a name="environment" />
 ## Environment
 
 ### Usage
@@ -511,6 +522,7 @@ When  buffering  output, lines which fall outside the  window  will  cause  furt
 
 These  functions  will  read the environment file into a buffer  pointed  to  by  _ENVFILE.    This buffer is  malloc'd  to 1024 bytes.  Future calls to getenv or putenv will  reference  this  buffer unless it is freed and the pointer set to NULL.
 
+<a name="file-picking-functions" />
 ## File Picking Functions
 
 ### Usage
@@ -553,6 +565,7 @@ The  filename returned is stored in a static data area.   Future  calls  to  the
         SetGC(1,0,0);      /* ditto for mousue pointer */
     }
 
+<a name="flush" />
 ## Flush
 
 ### Usage:
@@ -563,6 +576,7 @@ The  filename returned is stored in a static data area.   Future  calls  to  the
 
 `_Flush()`  will  flush  the internal write buffer. It also informs the linker to  include  buffering code.   If  an  error  occurs  during  a `_Flush()` write, -1 is returned and  the  error  number  is placed in errno.  0 is returned on success.
 
+<a name="font-functions" />
 ## Font Functions
 
 ### Usage
@@ -615,6 +629,7 @@ The  filename returned is stored in a static data area.   Future  calls  to  the
 
 None of these functions has an effect on hardware text windows.   -1 is returned on error, with the error number in errno.
 
+<a name="get-put-functions" />
 ## Get-Put Functions
 
 ### Usage
@@ -659,6 +674,7 @@ There are several known WindInt bugs which affect the operation of these functio
 - If  you  attempt  to  kill  a  non-existent buffer,  WindInt  will trash the buffer list forcing you to reboot.  Killing all  buffers with  bufnum equal to 0 does work correctly, however. - As stated above, things  like  killing  font buffers while other processes are using them do nasty things forcing a reboot.
 - `GetBlk()` can only get 639 dots across.
                
+<a name="get-string" />
 ## Get String
 
 ### Usage
@@ -671,6 +687,7 @@ There are several known WindInt bugs which affect the operation of these functio
 
 Getstr  will  create  an overlay window at column and row, and  read  a  string  from  path.    The carriage  return  is  retained  at the end of the string  (s.)  Getstr  will  only  read  up  to  n characters.   Care should be taken to insure that s is at least ( n + 1) characters long.
 
+<a name="key-sensing-functions" />
 ## Key Sensing Functions
 
 ### Usage
@@ -700,6 +717,7 @@ When the  appropriate  bit  is  set,  sensing  is enabled for the respective key
 
 Both functions  return -1 on error.  In the event of an error, the error number will be  stored  in the global variable errno.
 
+<a name="menuing-functions" />
 ## Menuing Functions
 
 ### Usage
@@ -762,6 +780,7 @@ All of these functions  return  the  item  number selected  or  0  if  no  selec
         while (num==0);
     }
 
+<a name="mouse-functions" />
 ## Mouse Functions
 
 ### Usage
@@ -816,6 +835,7 @@ All of these functions  return  the  item  number selected  or  0  if  no  selec
     #define WR_CNTRL 1 /* control region */
     #define WR_OFWIN 2 /* off window */
                
+<a name="mousekey" />
 ## MouseKey
 
 ### Usage:
@@ -827,6 +847,7 @@ All of these functions  return  the  item  number selected  or  0  if  no  selec
 
 `MouseKey()`  checks  the  current mouse button and keyboard status and returns a value based on  its findings.   If  the  left  mouse  button has been pressed, -1 is returned.    If  the  right  mouse button has  been  pressed,  -2 is returned.  If a key has been pressed, the key code  is  returned. `MouseKey()`  waits until a key or mouse button has been pressed.
 
+<a name="mousexy" />
 ## MouseXY
 
 ### Usage
@@ -841,6 +862,7 @@ All of these functions  return  the  item  number selected  or  0  if  no  selec
 
 NOTE:  this  function   only   returns   accurate coordinates on hardware text screens and graphics screens using an 8 by 8 font.
 
+<a name="movemem" />
 ## Movemem
 
 ### Usage
@@ -855,6 +877,7 @@ Movemem is a memory moving function which handles overlapping source  and  desti
 
 The algorithm that is used employs 2  byte  moves when possible to increase its speed.
 
+<a name="multi-vue-functions" />
 ## Multi-Vue Functions
 
 ### Usage
@@ -946,6 +969,7 @@ Consult  the  programmer's guide in the Multi-Vue manual for details on framed w
 
 There  are many bugs in WindInt that affect these functions.   The  easiest  to  overcome  is   the `_ss_wset()`  bug-  WindInt  forgets  to  erase the cursor  before  displaying  the  window  borders, resulting in  a  garbled  display.    This can be overcome  by  turning  the  cursor  off  manually before calling  `_ss_wset()`.   Scroll bars also do not work properly on windows that do not  lie  on the lefthand  side  of  the  window.   These bugs should be corrected in the next  release  of  the operating system.
 
+<a name="object-sprite-functions" />
 ## Object (Sprite) Functions
 
 ### Usage
@@ -992,6 +1016,7 @@ The `DelObj()`  function  will  delete  the  object pointed to  by  objptr.   If
 
 Look in the main archive 'CGFXLib.ar' to find the example program 'Balls.c'
 
+<a name="play" />
 ## Play
 
 ### Usage
@@ -1018,6 +1043,7 @@ T{n} | This  sets  the  tempo  to  the  number following it.
 
 Additionally,   the   play   string  can  contain substrings  (indicated  by   %s)   and   integers (indicated by %d) for variable arguments, much as can be done with `printf()`.  
 
+<a name="polygon-functions" />
 ## Polygon Functions
 
 ### Usage
@@ -1060,6 +1086,7 @@ These  functions  will  draw  closed  polygons on path.  Polygon  is  a  pointer
 
 `PolyTran()` will translate (move) a polygon.  Xoff and  yoff  are  the  x and y offsets to move each vertex of the polygon.
           
+<a name="set-type" />
 ## Set Type
 
 ### Usage
@@ -1073,6 +1100,7 @@ These  functions  will  draw  closed  polygons on path.  Polygon  is  a  pointer
 
 This function is dumb enough  with  text  windows not  to  take advantage of the patch to GRFDrv to allow 25 lines.  On return,  the  foreground  and background  colors  will  be  set  to  fg  and bg respectively.  In the case where a new window  is opened,  the  border  is  set  to  the background color.
 
+<a name="shadow" />
 ## Shadow
 
 ### Usage
@@ -1086,6 +1114,7 @@ This function is dumb enough  with  text  windows not  to  take advantage of the
 
 Note: due to  the  way  overlay  coordinates  are computed,   multiple   overlays  may  not  appear centered on the  window.    This  function  calls `_Flush()`  to  flush  any  pending  output  before creating the overlay (this does not automatically include buffering code, however!)
 
+<a name="getstat-setstat-functions" />
 ## GETSTAT-SETSTAT Functions
 
 ### Usage
@@ -1129,6 +1158,7 @@ Note: due to  the  way  overlay  coordinates  are computed,   multiple   overlay
 
 `_ss_mtyp()` will set the current monitor  type  to montype,   where   0   =   composite  monitor  or television, 1 =  analog  RGB  monitor,  and  2  = monochrome composite   monitor.    This  function should not generally be called from user programs as it affects system-wide resources.
 
+<a name="tone-function" />
 ## Tone Function
 
 ### Usage
@@ -1142,6 +1172,7 @@ The `_ss_tone()` function provides a C interface to the SS.Tone setstat call on 
 
 Due to an error in the system code, specifying  a volume  of  0  will force an immediate return, so rests (silence delays) must be done  using  sleep calls.  `_ss_tone()` returns -1 on error, where the error  code  is  placed  in  the  global variable errno.
 
+<a name="tandy-menu-function" />
 ## Tandy Menu Function
 
 ### Usage
@@ -1153,6 +1184,7 @@ Due to an error in the system code, specifying  a volume  of  0  will force an i
 
 `TandyMN()`  is  a  function  which  will  run  the appropriate  program  selected  from  the default Tandy menu.  Inum is the item number chosen  from the Tandy menu.  Fg and bg are the foreground and background  colors for the overlay window created for the appropriate program.  If path is <3, then the function creates an overlay  on  the  current window.   Otherwise,  the  function  assumes that path points to a new window.
 
+<a name="cursor-functions" />
 ## Cursor Functions
 
 ### Usage
@@ -1249,6 +1281,7 @@ UndlnOn() | turns underlining on.
 
 On error these functions return -1 with the error number in errno.
 
+<a name="window-functions" />
 ## Window Functions
 
 ### Usage
