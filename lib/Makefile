@@ -1,7 +1,10 @@
 # Makefile to create assembler library
 
-STRING = strlen.o strcmp.o
-MEM = mem.o memory.o memchr.o memccpy.o memcmp.o memset.o memcpy.o memchr.o
+STRING = strlen.o strcmp.o strpbrk.o strtok.o strspn.o patmatch.o strucmp.o \
+	reverse.o index.o stringsu.o strhcpy.o strclr.o strass.o strings.o \
+	case.o strncat.o hstrings.o strncmp.o strncpy.o
+MEM = mem.o memory.o memchr.o memccpy.o memcmp.o memset.o memcpy.o memchr.o \
+	memncmp.o
 SYS = sleep.o
 IO = printf.o pffinit.o pflinit.o pfldummy.o putc.o puts.o iob_data.o setbase.o fseek.o fopen.o
 LOW_IO = access.o create.o open.o read.o write.o
