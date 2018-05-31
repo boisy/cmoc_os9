@@ -18,8 +18,8 @@ void test_strcat(void)
 {
 	char buf[BUFLEN];
 	buf[0] = 0; // initialize
-	strcat(buf, "bat ");
 	strcat(buf, "cat ");
+	strcat(buf, "bat ");
 	strcat(buf, "dog");
 	if (strcmp(buf, p)==0)
 	{
@@ -33,8 +33,8 @@ void test_strncat(void)
 {
 	char buf[BUFLEN];
 	buf[0] = 0; // initialize
-	strncat(buf, "bat ", 4);
 	strncat(buf, "cat ", 4);
+	strncat(buf, "bat ", 4);
 	strncat(buf, "dog", 3);
 	if (strcmp(buf, p)==0)
 	{
@@ -44,8 +44,8 @@ void test_strncat(void)
 	}
 
 	buf[0] = 0; // initialize
-	strncat(buf, "bat ", 3);
 	strncat(buf, "cat ", 3);
+	strncat(buf, "bat ", 3);
 	strncat(buf, "dog", 3);
 	if (strcmp(buf, p1)==0)
 	{
@@ -55,6 +55,7 @@ void test_strncat(void)
 	}
 }
 
+#ifdef _CMOC_VERSION_
 void test_strhcpy(void)
 {
 	char buf[BUFLEN], ph[BUFLEN];
@@ -67,6 +68,8 @@ void test_strhcpy(void)
 		printf("%s [FAIL], expected '%s' got '%s'\n",__func__,p,buf);
 	}
 }
+#endif
+
 
 void test_strcpy(void)
 {
@@ -93,6 +96,7 @@ void test_strncpy(void)
 }
 
 
+#ifdef _CMOC_VERSION_
 void test_strclr(void)
 {
 	char buf[BUFLEN], buf2[BUFLEN];
@@ -109,7 +113,10 @@ void test_strclr(void)
 		printf("\n");
 	}
 }
+#endif
 
+
+#ifdef _CMOC_VERSION_
 void test_strucpy(void)
 {
 	char buf[BUFLEN];
@@ -121,6 +128,7 @@ void test_strucpy(void)
 		printf("%s [FAIL], expected '%s' got '%s'\n",__func__,pu,buf);
 	}
 }
+#endif
 
 void test_index(void)
 {
@@ -161,6 +169,7 @@ void test_rindex(void)
 }
 
 
+#ifdef _CMOC_VERSION_
 void test_reverse(void)
 {
 	char buf[BUFLEN];
@@ -174,8 +183,10 @@ void test_reverse(void)
 		printf("%s [FAIL], expected 0 got %d, (%s) (%s)\n",__func__,r,p,buf);
 	}
 }
+#endif
 
 
+#ifdef _CMOC_VERSION_
 void test_strend(void)
 {
 	char *myend = p + strlen(p);
@@ -187,6 +198,7 @@ void test_strend(void)
 		printf("%s [FAIL], expected %04x got %04x\n",__func__,myend,end);
 	}
 }
+#endif
 
 
 void test_strcmp(void)
@@ -225,6 +237,7 @@ void test_strlen(void)
 }
 
 
+#ifdef _CMOC_VERSION_
 void test_strucmp(void)
 {
 	int r = strcmp(p, pu);
@@ -235,8 +248,10 @@ void test_strucmp(void)
 		printf("%s [FAIL], expected 0 got %d\n",__func__,r);
 	}
 }
+#endif
 
 
+#ifdef _CMOC_VERSION_
 void test_strnucmp(void)
 {
 	int r = strncmp(p, pu, strlen(p));
@@ -247,7 +262,10 @@ void test_strnucmp(void)
 		printf("%s [FAIL], expected 0 got %d\n",__func__,r);
 	}
 }
+#endif
 
+
+#ifdef _CMOC_VERSION_
 void test_patmatch(void)
 {
 	int r = patmatch("bat", p, 0);
@@ -265,6 +283,7 @@ void test_patmatch(void)
 		printf("%s [FAIL], expected 0 got %d\n",__func__,r);
 	}
 }
+#endif
 
 
 void test_strchr(void)
@@ -318,7 +337,9 @@ void test_strtok(void)
 {
 	char *token;
 	int rr, r;
-	token = strtok(p, sep);
+	char buf[BUFLEN];
+	strcpy(buf, p);
+	token = strtok(buf, sep);
 	r = strcmp(token, "cat");
 	if ( r != 0 )
 	{
@@ -338,7 +359,7 @@ void test_strtok(void)
 	r = strcmp(token, "dog");
 	if ( r != 0 )
 	{
-		printf("%s [FAIL], expected 'bat' got %s\n",__func__,token);
+		printf("%s [FAIL], expected 'dog' got %s\n",__func__,token);
 		rr = r;
 	}
 
@@ -362,11 +383,12 @@ void test_strpbrk(void)
 }
 
 
+#ifdef _CMOC_VERSION_
 void test_strass(void)
 {
 	struct foo {
 		int a,b,c;
-	}
+	};
 
 	struct foo *p;
 	struct foo f = {1,2,-3};
@@ -387,14 +409,36 @@ void test_strass(void)
 		printf("  f.c=%d p->c=%d\n",f.a, p->c);
 	}
 }
+#endif
 
 
 int main()
 {
-	test_strcmp();
-	test_strcpy();
 	test_strcat();
 	test_strncat();
+	test_strcpy();
+	test_strncpy();
+	test_index();
+	test_rindex();
+	test_strcmp();
+	test_strncmp();
+	test_strlen();
+	test_strchr();
+	test_strrchr();
+	test_strspn();
+	test_strcspn();
+	test_strtok();
+	test_strpbrk();
+#ifdef _CMOC_VERSION_
+	test_strhcpy();
+	test_strclr();
+	test_strucpy();
+	test_reverse();
+	test_strend();
+	test_strucmp();
+	test_strnucmp();
+	test_patmatch();
 	test_strass();
+#endif
 	return 0;
 }
