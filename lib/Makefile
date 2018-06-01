@@ -2,7 +2,7 @@
 
 STRING = strlen.o strcmp.o strpbrk.o strtok.o strspn.o patmatch.o strucmp.o \
 	reverse.o index.o stringsu.o strhcpy.o strclr.o strass.o strings.o \
-	case.o strncat.o hstrings.o strncmp.o strncpy.o
+	case.o strncat.o hstrings.o strncmp.o strncpy.o strnucmp.o
 MEM = mem.o memory.o memchr.o memccpy.o memcmp.o memset.o memcpy.o memchr.o \
 	memncmp.o
 SYS = sleep.o

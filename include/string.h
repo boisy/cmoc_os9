@@ -19,7 +19,7 @@ int   strcmp(char *s1, char *s2);
 int   strncmp(char *s1, char *s2, size_t len);
 int   strlen(char *s);
 int   strucmp(char *s1, char *s2);
-int   strnucmp(char *s1, char *s2);
+int   strnucmp(char *s1, char *s2, size_t len);
 int   patmatch(char *pattern, char *str, char forceCase);
 char  *strchr(char *str, int c);
 char  *strrchr(char *str, int c);
