@@ -2,7 +2,7 @@
 #include <string.h>
 
 __norts__ asm int
-memcmp(void *s1, void *s2, size_t n)
+memcmp(char *dst, char *src)
 {
 	asm
 	{

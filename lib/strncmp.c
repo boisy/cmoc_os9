@@ -1,7 +1,12 @@
-* Disassembly by Os9disasm of strncmp.r
+#include <string.h>
+#include <sys/types.h>
+/* Disassembly by Os9disasm of strncmp.r */
 
- section code
-
+int asm __norts__ strncmp(char *s1, char *s2, size_t n)
+{
+	asm
+	{
+strncmp EXPORT
 strncmp: pshs  y,u 
  ldx   6,s 
  ldu   8,s 
@@ -21,6 +26,6 @@ L0015 ldb   ,u
 L001f clra   
  clrb   
 L0021 puls  y,u,pc 
-
- endsect  
+	}
+}
 
