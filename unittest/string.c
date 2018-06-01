@@ -61,7 +61,7 @@ void test_strhcpy(void)
 	char buf[BUFLEN], ph[BUFLEN];
 	strtohstr(ph, p);
 	strhcpy(buf, ph);
-	if (strncmp(buf, ph, strlen(p))==0)
+	if (strcmp(buf, p)==0)
 	{
 		printf("%s [PASS]\n",__func__);
 	} else {
@@ -86,7 +86,7 @@ void test_strcpy(void)
 void test_strncpy(void)
 {
 	char buf[BUFLEN];
-	strncpy(buf, p, PLEN);
+	strncpy(buf, p, PLEN+1);
 	if (strcmp(buf, p)==0)
 	{
 		printf("%s [PASS]\n",__func__);
@@ -173,7 +173,7 @@ void test_rindex(void)
 void test_reverse(void)
 {
 	char buf[BUFLEN];
-	strncpy(buf, p, strlen(p));
+	strcpy(buf, p);
 	reverse(buf);
 	int r = strcmp(pr, buf);
 	if (r==0)
@@ -240,7 +240,7 @@ void test_strlen(void)
 #ifdef _CMOC_VERSION_
 void test_strucmp(void)
 {
-	int r = strcmp(p, pu);
+	int r = strucmp(p, pu);
 	if (r==0)
 	{
 		printf("%s [PASS]\n",__func__);
@@ -254,7 +254,7 @@ void test_strucmp(void)
 #ifdef _CMOC_VERSION_
 void test_strnucmp(void)
 {
-	int r = strncmp(p, pu, strlen(p));
+	int r = strnucmp(p, pu, strlen(p));
 	if (r==0)
 	{
 		printf("%s [PASS]\n",__func__);
@@ -269,18 +269,18 @@ void test_strnucmp(void)
 void test_patmatch(void)
 {
 	int r = patmatch("bat", p, 0);
-	if (r==4)
+	if (r)
 	{
 		printf("%s [PASS]\n",__func__);
 	} else {
-		printf("%s [FAIL], expected 0 got %d\n",__func__,r);
+		printf("%s [FAIL], expected 1 got %d\n",__func__,r);
 	}
 	r = patmatch("BAT", p, 1);
-	if (r==4)
+	if (r)
 	{
 		printf("%s [PASS]\n",__func__);
 	} else {
-		printf("%s [FAIL], expected 0 got %d\n",__func__,r);
+		printf("%s [FAIL], expected 1 got %d\n",__func__,r);
 	}
 }
 #endif
@@ -338,6 +338,8 @@ void test_strtok(void)
 	char *token;
 	int rr, r;
 	char buf[BUFLEN];
+
+	rr = 0;
 	strcpy(buf, p);
 	token = strtok(buf, sep);
 	r = strcmp(token, "cat");
