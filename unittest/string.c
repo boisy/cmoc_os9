@@ -266,16 +266,39 @@ void test_strnucmp(void)
 
 
 #ifdef _CMOC_VERSION_
-void test_patmatch(void)
+void test_patmatch_questionmark(void)
 {
-	int r = patmatch("bat", p, 0);
+	char *tst = "cat ?at dog";
+	int r = patmatch(tst, p, 0);
+	if (r)
+	{
+		printf("%s [PASS]\n",__func__);
+	} else {
+		printf("%s [FAIL], expected 1 got %d, %s, %s\n",__func__,r,tst,p);
+	}
+	char *tstu = "cat bat d?g";
+	r = patmatch(tstu, pu, 1);
+	if (r)
+	{
+		printf("%s [PASS]\n",__func__);
+	} else {
+		printf("%s [FAIL], expected 1 got %d, %s, %s\n",__func__,r,tstu,pu);
+	}
+}
+#endif
+
+
+#ifdef _CMOC_VERSION_
+void test_patmatch_asterix(void)
+{
+	int r = patmatch("*dog", p, 0);
 	if (r)
 	{
 		printf("%s [PASS]\n",__func__);
 	} else {
 		printf("%s [FAIL], expected 1 got %d\n",__func__,r);
 	}
-	r = patmatch("BAT", p, 1);
+	r = patmatch("*dog", pu, 1);
 	if (r)
 	{
 		printf("%s [PASS]\n",__func__);
@@ -347,7 +370,7 @@ void test_strtok(void)
 	{
 		printf("%s [FAIL], expected 'cat' got %s\n",__func__,token);
 		rr = r;
-	}	
+	}
 
 	token = strtok(NULL, sep);
 	r = strcmp(token, "bat");
@@ -356,7 +379,7 @@ void test_strtok(void)
 		printf("%s [FAIL], expected 'bat' got %s\n",__func__,token);
 		rr = r;
 	}
-	
+
 	token = strtok(NULL, sep);
 	r = strcmp(token, "dog");
 	if ( r != 0 )
@@ -439,7 +462,8 @@ int main()
 	test_strend();
 	test_strucmp();
 	test_strnucmp();
-	test_patmatch();
+	test_patmatch_questionmark();
+	test_patmatch_asterix();
 	test_strass();
 #endif
 	return 0;

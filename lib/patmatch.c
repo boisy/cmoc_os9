@@ -7,7 +7,7 @@ int patmatch(char *pattern, char *str, char forceCase)
 {
 	char   pc;                    /* a single character from pattern */
 
-	while (pc = (forceCase ? _toupper(*pattern++) : *pattern++))
+	while (pc = ((forceCase && islower(*pattern)) ? _toupper(*pattern++) : *pattern++))
 	{
 		if (pc == '*')
 		{
@@ -25,7 +25,7 @@ int patmatch(char *pattern, char *str, char forceCase)
             	return (0);
 			else if (pc == '?')
 				str++;
-			else if (pc != (forceCase ? _toupper(*str++) : *str++))
+			else if (pc != ((forceCase && islower(*str)) ? _toupper(*str++) : *str++))
 				return 0;
 	}
 
