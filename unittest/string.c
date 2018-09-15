@@ -276,7 +276,7 @@ void test_patmatch_questionmark(void)
 	} else {
 		printf("%s [FAIL], expected 1 got %d, %s, %s\n",__func__,r,tst,p);
 	}
-	char *tstu = "cat bat d?g";
+	char *tstu = "CAT BAT D?G";
 	r = patmatch(tstu, pu, 1);
 	if (r)
 	{
@@ -298,7 +298,7 @@ void test_patmatch_asterix(void)
 	} else {
 		printf("%s [FAIL], expected 1 got %d\n",__func__,r);
 	}
-	r = patmatch("*dog", pu, 1);
+	r = patmatch("*DOG", pu, 1);
 	if (r)
 	{
 		printf("%s [PASS]\n",__func__);

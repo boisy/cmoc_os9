@@ -18,7 +18,7 @@
 #ifndef _CTYPE_H
 #define _CTYPE_H
 
-extern char     _chcodes[];	/* in chcodes.r */
+extern const unsigned char     _chcodes[];	/* in chcodes.r */
 
 #define _CONTROL       0x01
 #define _UPPER         0x02
