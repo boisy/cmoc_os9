@@ -19,7 +19,7 @@ typedef struct profstr {
 
 static prof pfs[MAXFUNC];
 static prof *pfree = pfs;
-static prof *pmax = &pfs[MAXFUNC];
+static prof *pmax = pfs + MAXFUNC;
 
 
 void _prof(int (*afunc)(), char *name)
