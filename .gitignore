@@ -1,0 +1,9 @@
+*.swp
+*.o
+*~
+cmoc-lib/*
+cgfx/libcgfx.a
+lib/libc.a
+unittest/*
+!unittest/**/
+!unittest/*.*

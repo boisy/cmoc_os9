@@ -1,0 +1,36 @@
+name: Build
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  build:
+    name: Build 
+    runs-on: ubuntu-latest
+    container: jamieleecho/coco-dev:0.21
+
+    steps:
+      -
+        name: Checkout code
+        uses: actions/checkout@v2
+      -
+        name: Build lib
+        run: cd lib && make
+      -
+        name: Build cgfx
+        run: cd cgfx && make
+      -
+        name: Prep Library Artifact
+        run: |
+             mkdir -p cmoc-lib/lib
+             mkdir cmoc-lib/include
+             mkdir cmoc-lib/tests
+             cp cgfx/libcgfx.a lib/libc.a cmoc-lib/lib
+             cp -R include/* cgfx/include/* cmoc-lib/include 
+             cp `find unittest -type f ! -name "*.*"` cmoc-lib/tests
+      -
+        name: 'Upload Library Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: cmoc-lib
+          path: cmoc-lib
